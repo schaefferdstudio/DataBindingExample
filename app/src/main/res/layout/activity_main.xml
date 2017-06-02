@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="MainActivity"
+    >
+
+    <data>
+        <variable name="viewModel" type="schaefferdstudio.databindingexample.ViewModel.MainActivityViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+
+
+        <CheckedTextView
+            android:id="@+id/checkedTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:checked="@{viewModel.enableStartChecked}"
+            android:onClick="@{()->viewModel.setEnableStartChecked(!viewModel.enableStartChecked)}"
+            android:text="@string/enableStart" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@{viewModel.volumeLevel == 0 ? @color/colorAccent : @color/colorPrimaryDark}"
+            android:text="@{Integer.toString(viewModel.volumeLevel)}" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:progress="@{viewModel.volumeLevel}"
+            android:onProgressChanged="@{(sb, progress, fU)->viewModel.setVolumeLevel(progress)}"
+            android:max="15"/>
+
+
+    </LinearLayout>
+
+
+
+</layout>
